@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    // Function to return Breadth First Traversal of given graph.
+    vector<int> bfs(vector<vector<int>> &adj) {
+        // Code here
+        int V = adj.size();  // Determine number of vertices dynamically
+        vector<int> bfs_result;
+        vector<bool> visited(V, false);
+        queue<int> q;
+
+        if (V == 0) return bfs_result; // Handle empty graph
+
+        q.push(0);  // Start BFS from vertex 0
+        visited[0] = true;
+
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            bfs_result.push_back(node);
+
+            // Traverse neighbors in given order
+            for (int neighbor : adj[node]) {
+                if (!visited[neighbor]) {
+                    q.push(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+        return bfs_result;
+    }
+};
